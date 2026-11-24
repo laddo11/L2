@@ -1,4 +1,362 @@
-const dur = 6 + Math.random() * 5;
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Good Morning Pakhi 🌅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  body{
+    font-family:'Poppins','Hind Siliguri',sans-serif;color:#fff;
+    overflow-x:hidden;background:#1e1b4b;
+  }
+  section{
+    position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;
+    scroll-snap-align:start;
+  }
+
+  /* ================= SCENE 1 : GOOD MORNING ================= */
+  #s1{
+    background:linear-gradient(160deg,#ff9a9e,#fad0c4,#ffd86f,#fda085,#a1c4fd,#c2e9fb);
+    background-size:400% 400%;
+    animation:sky 18s ease infinite;
+  }
+  @keyframes sky{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  .sun{
+    position:absolute;left:50%;bottom:-140px;width:190px;height:190px;border-radius:50%;
+    transform:translateX(-50%);
+    background:radial-gradient(circle at 35% 35%,#fff7b0,#ffd54a 55%,#ffb300);
+    box-shadow:0 0 60px 30px rgba(255,214,74,.6),0 0 160px 80px rgba(255,170,60,.4);
+    animation:rise 6s cubic-bezier(.2,.8,.2,1) forwards, pulse 4s ease-in-out 6s infinite;
+    z-index:1;
+  }
+  @keyframes rise{to{bottom:26%}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 60px 30px rgba(255,214,74,.6),0 0 160px 80px rgba(255,170,60,.4)}50%{box-shadow:0 0 80px 45px rgba(255,214,74,.75),0 0 200px 110px rgba(255,170,60,.5)}}
+  .rays{
+    position:absolute;left:50%;bottom:26%;width:900px;height:900px;margin-left:-450px;margin-bottom:-355px;
+    background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.18) 0 6deg,transparent 6deg 18deg);
+    border-radius:50%;opacity:0;
+    -webkit-mask-image:radial-gradient(circle,#000 10%,transparent 65%);mask-image:radial-gradient(circle,#000 10%,transparent 65%);
+    z-index:0;animation:spin 40s linear infinite, fadein 3s 4s forwards;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes fadein{to{opacity:1}}
+
+  .cloud{position:absolute;background:#fff;border-radius:100px;opacity:.85;z-index:2;filter:blur(.5px)}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .cloud::before{width:50%;height:160%;top:-70%;left:15%}
+  .cloud::after{width:36%;height:120%;top:-45%;right:14%}
+  .c1{width:140px;height:40px;top:12%;left:-200px;animation:drift 38s linear infinite}
+  .c2{width:100px;height:30px;top:24%;left:-200px;animation:drift 52s linear 8s infinite;opacity:.65}
+  .c3{width:180px;height:50px;top:6%;left:-220px;animation:drift 66s linear 18s infinite;opacity:.5}
+  @keyframes drift{to{transform:translateX(calc(100vw + 450px))}}
+
+  .bird{position:absolute;z-index:3;width:44px;left:-60px;animation:fly linear infinite}
+  .bird svg{width:100%;overflow:visible}
+  .bird .wing{transform-origin:50% 60%;animation:flap .5s ease-in-out infinite alternate}
+  @keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(-.5)}}
+  @keyframes fly{
+    0%{transform:translate(0,0)}
+    50%{transform:translate(55vw,-40px)}
+    100%{transform:translate(115vw,20px)}
+  }
+  .b1{top:22%;animation-duration:16s;animation-delay:2s}
+  .b2{top:30%;width:32px;animation-duration:20s;animation-delay:5s}
+  .b3{top:16%;width:26px;animation-duration:24s;animation-delay:9s}
+
+  .hills{position:absolute;bottom:0;left:0;width:100%;height:34%;z-index:4}
+  .hills svg{width:100%;height:100%;display:block}
+
+  .content{
+    position:relative;z-index:6;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    padding-top:9vh;text-align:center;padding-inline:20px;
+  }
+  .hello{
+    font-size:clamp(.8rem,2.5vw,1rem);letter-spacing:.4em;text-transform:uppercase;
+    opacity:0;animation:up 1.2s .6s forwards;
+  }
+  h1{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(3rem,13vw,7.5rem);line-height:1.05;margin-top:10px;
+    text-shadow:0 4px 25px rgba(255,120,80,.55);
+  }
+  .l{display:inline-block;opacity:0;transform:translateY(40px) rotate(-8deg);animation:letter .8s cubic-bezier(.2,1.4,.4,1) forwards}
+  @keyframes letter{to{opacity:1;transform:translateY(0) rotate(0)}}
+  .sp{display:inline-block;width:.3em}
+  .name{
+    display:block;font-size:1.25em;
+    background:linear-gradient(90deg,#fff,#fff3a0,#ffc2e0,#fff);
+    background-size:300% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 4s linear infinite;
+    filter:drop-shadow(0 4px 18px rgba(255,90,120,.6));
+  }
+  @keyframes shimmer{to{background-position:300% 0}}
+
+  .msg{
+    margin-top:18px;min-height:3.2em;max-width:520px;
+    font-family:'Hind Siliguri','Poppins',sans-serif;font-size:clamp(1rem,3.6vw,1.3rem);
+    text-shadow:0 2px 10px rgba(0,0,0,.18);
+    opacity:0;animation:up 1s 2.8s forwards;
+  }
+  .msg span{display:inline-block;transition:opacity .8s,transform .8s}
+  .msg span.out{opacity:0;transform:translateY(10px)}
+
+  .btns{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .btn{
+    margin-top:20px;border:none;cursor:pointer;
+    padding:14px 30px;border-radius:50px;font-size:1rem;font-weight:600;font-family:'Hind Siliguri','Poppins',sans-serif;
+    color:#d6336c;background:#fff;
+    box-shadow:0 8px 30px rgba(255,80,120,.45);
+    opacity:0;animation:up 1s 3.6s forwards, beat 1.8s 4.6s ease-in-out infinite;
+    transition:transform .2s;
+  }
+  .btn:active{transform:scale(.93)}
+  .btn.alt{
+    color:#fff;background:linear-gradient(135deg,#ff6a88,#ff99ac,#ffb347);
+    box-shadow:0 8px 30px rgba(255,106,136,.55);
+    animation:up 1s 4.2s forwards, beat 1.8s 5.2s ease-in-out infinite;
+  }
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+  @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  .spark{position:absolute;z-index:2;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px #fff;animation:tw 2.5s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.2)}}
+
+  .petal{position:fixed;top:-30px;z-index:5;pointer-events:none;animation:fall linear forwards}
+  @keyframes fall{to{transform:translate(var(--dx),110vh) rotate(var(--rot))}}
+
+  /* ================= SCENE 2 : EXAM FINISHED ================= */
+  #s2{
+    background:linear-gradient(160deg,#1e1b4b,#5b21b6,#be185d,#f59e0b);
+    background-size:300% 300%;animation:sky 14s ease infinite;
+  }
+  .content2{
+    position:relative;z-index:6;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:20px;
+  }
+  .cap{font-size:clamp(3.5rem,16vw,6rem);display:inline-block;animation:capfloat 3s ease-in-out infinite}
+  @keyframes capfloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+  #s2 .anim{opacity:0}
+  #s2.in .anim{animation:up 1s forwards}
+  #s2 .l{animation-play-state:paused}
+  #s2.in .l{animation-play-state:running}
+  .tag{
+    font-size:clamp(.8rem,2.5vw,1rem);letter-spacing:.35em;text-transform:uppercase;margin-top:6px;
+  }
+  h2.big{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(2.8rem,12vw,6.5rem);line-height:1.1;margin-top:8px;
+    text-shadow:0 4px 30px rgba(255,200,80,.7);
+  }
+  h2.big .name{font-size:1.1em}
+  .msg2{
+    margin-top:16px;max-width:520px;line-height:1.8;
+    font-family:'Hind Siliguri','Poppins',sans-serif;font-size:clamp(1rem,3.6vw,1.25rem);
+    text-shadow:0 2px 12px rgba(0,0,0,.35);
+  }
+  #s2 .btn{opacity:1;animation:none}
+  #s2.in .btn.alt{animation:beat 1.8s 1s ease-in-out infinite}
+  .btn.ghost{
+    background:rgba(255,255,255,.18);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.5);
+    margin-top:12px;padding:10px 24px;font-size:.9rem;backdrop-filter:blur(6px);
+  }
+  #s2 .btn.alt{background:linear-gradient(135deg,#fbbf24,#fb7185,#c084fc);color:#fff}
+
+  .star{position:absolute;z-index:1;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
+  .balloon{position:fixed;bottom:-80px;z-index:5;pointer-events:none;animation:balloon linear forwards}
+  @keyframes balloon{to{transform:translate(var(--dx),-125vh) rotate(var(--rot))}}
+  .confetti{position:fixed;top:-20px;z-index:30;pointer-events:none;animation:conf linear forwards}
+  @keyframes conf{to{transform:translate(var(--dx),108vh) rotate(var(--rot))}}
+
+  /* ================= SHARED ================= */
+  .float{position:fixed;pointer-events:none;z-index:15;user-select:none}
+  .overlay{
+    position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,.35);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .5s;padding:20px;
+  }
+  .overlay.show{opacity:1;pointer-events:auto}
+  .card{
+    max-width:420px;width:100%;padding:34px 26px;border-radius:26px;text-align:center;
+    background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,230,240,.95));
+    color:#b0245e;box-shadow:0 20px 70px rgba(0,0,0,.35);
+    transform:scale(.6) rotate(-4deg);transition:transform .6s cubic-bezier(.2,1.5,.4,1);
+  }
+  .overlay.show .card{transform:scale(1) rotate(0)}
+  .card h2{font-family:'Dancing Script',cursive;font-size:2.4rem;margin-bottom:10px}
+  .card p{font-family:'Hind Siliguri',sans-serif;font-size:1.1rem;line-height:1.7;color:#6d2146}
+  .card .close{margin-top:18px;border:none;background:#d6336c;color:#fff;padding:10px 26px;border-radius:30px;font-size:.95rem;cursor:pointer;font-family:inherit}
+  .foot{position:absolute;bottom:10px;width:100%;text-align:center;z-index:7;font-size:.78rem;opacity:.85;font-family:'Hind Siliguri',sans-serif}
+</style>
+</head>
+<body>
+
+<!-- ================= PART 1 : GOOD MORNING ================= -->
+<section id="s1">
+  <div class="rays"></div>
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <div class="bird b1"><svg viewBox="0 0 40 20"><g class="wing"><path d="M0 12 Q10 -2 20 10 Q30 -2 40 12 Q30 6 20 14 Q10 6 0 12Z" fill="#fff" opacity=".95"/></g></svg></div>
+  <div class="bird b2"><svg viewBox="0 0 40 20"><g class="wing"><path d="M0 12 Q10 -2 20 10 Q30 -2 40 12 Q30 6 20 14 Q10 6 0 12Z" fill="#fff" opacity=".9"/></g></svg></div>
+  <div class="bird b3"><svg viewBox="0 0 40 20"><g class="wing"><path d="M0 12 Q10 -2 20 10 Q30 -2 40 12 Q30 6 20 14 Q10 6 0 12Z" fill="#fff" opacity=".8"/></g></svg></div>
+
+  <div class="hills">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#f9a26c" opacity=".7" d="M0,160 C240,60 480,220 720,140 C960,60 1200,200 1440,110 L1440,320 L0,320Z"/>
+      <path fill="#e8788f" opacity=".85" d="M0,210 C200,130 440,260 700,200 C980,140 1180,260 1440,180 L1440,320 L0,320Z"/>
+      <path fill="#7b4b94" d="M0,260 C260,200 520,300 780,250 C1040,200 1240,290 1440,240 L1440,320 L0,320Z"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="hello">Rise &amp; Shine</div>
+    <h1 id="title"></h1>
+    <div class="msg"><span id="msg"></span></div>
+    <div class="btns">
+      <button class="btn" id="open">Ekta surprise ache 🎁</button>
+      <button class="btn alt" id="next">Ar ekta kotha ache ⬇️</button>
+    </div>
+  </div>
+  <div class="foot">Made with 💖 just for you</div>
+</section>
+
+<!-- ================= PART 2 : EXAM FINISHED ================= -->
+<section id="s2">
+  <div class="content2">
+    <div class="cap anim" style="animation-delay:.2s">🎓</div>
+    <div class="tag anim" style="animation-delay:.6s">Congratulations</div>
+    <h2 class="big" id="title2"></h2>
+    <p class="msg2 anim" style="animation-delay:2.6s">
+      Aj tomar sesh exam chilo, ar ekhon ta sesh! 🎉<br>
+      Ei koyek din tumi je koto porishrom korecho ami jani. Ekhon ekdom free, ekhon sudhu relax, ghumano, ar ghurte jawa. Tumi darun korecho, Pakhi! 💖
+    </p>
+    <button class="btn alt anim" id="celebrate" style="animation-delay:3.4s">Abar celebrate koro 🎉</button>
+    <button class="btn ghost anim" id="back" style="animation-delay:3.8s">⬆️ Sokal e fire jao</button>
+  </div>
+  <div class="foot">Proud of you, Pakhi 🥹💛</div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="card">
+    <h2>Pakhi 💛</h2>
+    <p id="card-text"></p>
+    <button class="close" id="close">Ar ekbar 😊</button>
+  </div>
+</div>
+
+<script>
+/* ========= EDIT HERE ========= */
+const NAME = "Pakhi";
+const MESSAGES = [
+  "Notun ekta din, notun ekta hashi 🌸",
+  "Tomar din ta hok sundor, sunrise er moto 🌅",
+  "Aj tumi je ta-i korba, darun korba ✨",
+  "Subho sokal! Chai-coffee kheyecho? ☕",
+  "Tomar hashi ta-i amar sokaler alo 💛"
+];
+const SURPRISE = "Prottek sokal ami ekta kotha e vabi — tumi amar jibon er sob cheye sundor upohar. Aj ekta darun din hok tomar. Love you, Pakhi! 💕";
+/* ============================== */
+
+const $ = id => document.getElementById(id);
+const s1 = $('s1'), s2 = $('s2');
+let s1Active = true, s2Active = false, celebrated = false;
+
+/* ---------- letter-by-letter builder ---------- */
+function letters(text, start, step) {
+  let h = "", d = start;
+  for (const ch of text) {
+    h += ch === " " ? '<span class="sp"></span>'
+      : `<span class="l" style="animation-delay:${d.toFixed(2)}s">${ch}</span>`;
+    d += step;
+  }
+  return { html: h, end: d };
+}
+
+/* ---------- Part 1 title ---------- */
+(function(){
+  const a = letters("Good Morning", 1.0, 0.07);
+  const b = letters(NAME + " 💛", a.end, 0.1);
+  $('title').innerHTML = a.html + '<span class="name">' + b.html + '</span>';
+})();
+
+/* ---------- Part 2 title ---------- */
+(function(){
+  const a = letters("Exam Finished!", 0.9, 0.06);
+  const b = letters(NAME + " 🎓", a.end, 0.1);
+  $('title2').innerHTML = a.html + '<br><span class="name">' + b.html + '</span>';
+})();
+
+/* ---------- Rotating messages ---------- */
+const msgEl = $('msg');
+let mi = 0;
+msgEl.textContent = MESSAGES[0];
+setInterval(() => {
+  msgEl.classList.add('out');
+  setTimeout(() => {
+    mi = (mi + 1) % MESSAGES.length;
+    msgEl.textContent = MESSAGES[mi];
+    msgEl.classList.remove('out');
+  }, 800);
+}, 4200);
+
+/* ---------- Sparkles (part 1) & stars (part 2) ---------- */
+for (let i = 0; i < 26; i++) {
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 50 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.animationDuration = 2 + Math.random() * 2.5 + 's';
+  s1.appendChild(s);
+}
+for (let i = 0; i < 50; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s2.appendChild(s);
+}
+
+/* ---------- Petals (only while part 1 visible) ---------- */
+const PETALS = ["🌸","🌼","🌷","🌺","🍃","💮"];
+function petal() {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = PETALS[Math.floor(Math.random() * PETALS.length)];
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.fontSize = 14 + Math.random() * 18 + 'px';
+  p.style.setProperty('--dx', (Math.random() * 200 - 100) + 'px');
+  p.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+  const dur = 7 + Math.random() * 6;
+  p.style.animationDuration = dur + 's';
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), dur * 1000);
+}
+setTimeout(() => setInterval(() => { if (s1Active) petal(); }, 700), 3000);
+
+/* ---------- Balloons (only while part 2 visible) ---------- */
+const BAL = ["🎈","🎈","🎈","🎊","⭐","💖"];
+function balloon() {
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  b.textContent = BAL[Math.floor(Math.random() * BAL.length)];
+  b.style.left = Math.random() * 100 + 'vw';
+  b.style.fontSize = 26 + Math.random() * 26 + 'px';
+  b.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+  b.style.setProperty('--rot', (Math.random() * 40 - 20) + 'deg');
+  const dur = 6 + Math.random() * 5;
   b.style.animationDuration = dur + 's';
   document.body.appendChild(b);
   setTimeout(() => b.remove(), dur * 1000);
@@ -19,7 +377,7 @@ function burst(x, y, n = 24) {
     const dist = 80 + Math.random() * 180;
     h.animate([
       { transform: 'translate(-50%,-50%) scale(.3)', opacity: 1 },
-      { transform: translate(calc(-50% + ${Math.cos(ang)*dist}px), calc(-50% + ${Math.sin(ang)*dist - 80}px)) scale(1.2), opacity: 0 }
+      { transform: `translate(calc(-50% + ${Math.cos(ang)*dist}px), calc(-50% + ${Math.sin(ang)*dist - 80}px)) scale(1.2)`, opacity: 0 }
     ], { duration: 1400 + Math.random() * 800, easing: 'cubic-bezier(.2,.8,.3,1)' }).onfinish = () => h.remove();
   }
 }
